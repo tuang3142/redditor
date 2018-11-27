@@ -9,6 +9,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        redditor=redditor:main
+        redditor=redditor:cli
     ''',
 )
