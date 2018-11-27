@@ -1,21 +1,23 @@
 import click
 import requests
 
-class colors:
-    HEADER = '\033[93m' + '\033[1m'
-    TITLE = '\033[92m'
-    END = '\033[0m'
-    WARNING = '\033[93m'
 
 @click.group()
-def main():
+def cli():
     """
     CLI reddit for breakfast 
     """
     pass
 
-@main.command()
-def feed(subs):
+
+@cli.command()
+def feed():
+    """
+    most upvoted threads from subs pass 24 hours
+    """
+
+    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'r') # should be local/relative path
+    subs = file.read().split(',')
     for sub in subs:
         url = 'https://www.reddit.com/r/{}/hot/.json'.format(sub)
         params = { 'limit':5 }
@@ -29,13 +31,49 @@ def feed(subs):
                     'score': item['data']['score'],
                     'link': 'http://reddit.com' + item['data']['permalink']
                 })
-            print(colors.HEADER + '/r/{}'.format(sub) + colors.END)
+            header = ('/r/' + sub).upper()
+            click.echo(click.style(header, fg='cyan', bold=True))
             for thread in threads:
-                title = colors.TITLE + '[{}] {}'.format(thread['score'], thread['title']) + colors.END
+                title = '[{}] {}'.format(thread['score'], thread['title'])
                 link = thread['link']
-                print(title, '\n', link)
-            print()
-        except:
-            print(colors.WARNING + 'too much reddit, back to work!' + colors.END)
+                click.echo(click.style(title, fg='green'))
+                click.echo(link)
+            click.echo()
+        except: # should be unlimited
+            warning = 'too much reddit, get back to work!'
+            click.echo(click.style(warning, fg='red'))
 
-@main.command()
+
+@cli.command()
+@click.argument('sub')
+@click.option('--unsub', '-u', is_flag=True, help='unsubscribe')
+def subscribe(sub, unsub):
+    """
+    subscribe/unsubscribe to a subreddit
+    """
+    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'r')
+    subs = file.read().split(',')
+    if unsub:
+        try:
+            subs.remove(sub)
+        except:
+            click.echo('/r/{} is not in the cool list'.format(sub))
+    else:
+        subs.append(sub)
+        subs = list(set(subs))
+    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'w')
+    file.write(','.join(subs))
+    file.close()
+
+
+@cli.command()
+def subreddits():
+    """
+    show all /r/
+    """
+    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'r')
+    click.echo(file.read())
+
+
+if __name__ == "__main__":
+    cli()
