@@ -23,11 +23,9 @@ Commands:
 pip install --editable .
 ```
 
-## MIT licence
-
 ## to do
 
-next version should have:
+the next version should have:
 
 - [ ] unlimited query
 - [ ] command quit/q/double Enter to quit
