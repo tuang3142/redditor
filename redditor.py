@@ -1,23 +1,28 @@
 import click
 import requests
+import os
 
 
 @click.group()
-def cli():
+@click.version_option()
+def main():
     """
-    CLI reddit for breakfast 
+    command line interface for reddit
     """
     pass
 
 
-@cli.command()
-def feed():
+@main.command()
+@click.option('--subreddit', '-r', help='feed from a specified subreddit')
+def feed(subreddit):
     """
     most upvoted threads from subs pass 24 hours
     """
-
-    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'r') # should be local/relative path
-    subs = file.read().split(',')
+    if subreddit:
+        subs = [subreddit]
+    else:
+        file = open(filepath('subs.txt'), 'r')
+        subs = file.read().split(',')
     for sub in subs:
         url = 'https://www.reddit.com/r/{}/hot/.json'.format(sub)
         params = { 'limit':5 }
@@ -39,19 +44,19 @@ def feed():
                 click.echo(click.style(title, fg='green'))
                 click.echo(link)
             click.echo()
-        except: # should be unlimited
+        except:
             warning = 'too much reddit, get back to work!'
             click.echo(click.style(warning, fg='red'))
 
 
-@cli.command()
+@main.command()
 @click.argument('sub')
 @click.option('--unsub', '-u', is_flag=True, help='unsubscribe')
-def subscribe(sub, unsub):
+def change(sub, unsub):
     """
     subscribe/unsubscribe to a subreddit
     """
-    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'r')
+    file = open(filepath('subs.txt'), 'r')
     subs = file.read().split(',')
     if unsub:
         try:
@@ -61,19 +66,25 @@ def subscribe(sub, unsub):
     else:
         subs.append(sub)
         subs = list(set(subs))
-    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'w')
+    file = open(filepath('subs.txt'), 'w')
     file.write(','.join(subs))
     file.close()
 
 
-@cli.command()
-def subreddits():
+@main.command()
+def all():
     """
     show all /r/
     """
-    file = open('/home/v3spyr/Desktop/CLI-PROJECT/Redditor/subs.txt', 'r')
+    file = open(filepath('subs.txt'), 'r')
     click.echo(file.read())
+
+# get absolute path to file
+def filepath(file):
+    dirname = os.path.dirname(__file__)
+    path = os.path.join(dirname, 'subs.txt')
+    return path
 
 
 if __name__ == "__main__":
-    cli()
+    main()
