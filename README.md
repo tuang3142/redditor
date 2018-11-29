@@ -2,7 +2,7 @@
 
 use reddit like a doge
 
-![demo](link.svg,"demo")
+![demo](https://raw.githack.com/daenylio/redditor/master/demo.svg,"demo")
 
 ## usage
 
