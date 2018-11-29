@@ -1,6 +1,7 @@
-# redditor 2.0
+# redditor 0.2.1
 
 command line interface for reddit
+or use reddit like a doge
 
 ![demo](https://raw.githack.com/daenylio/redditor/master/demo.svg "demo")
 
@@ -21,25 +22,14 @@ Commands:
 
 ## installation
 
-pre-install
-
 ```bash
-pip install click
-pip install praw
-```
-
-in the extracted folder, run:
-
-```bash
-pip install --editable .
+pip install redditor
 ```
 
 ## to do
 
-next version should have:
+version 0.2.1 should have:
 
 - [x] unlimited query
-- [x] command quit/q/double Enter to quit
-- [x] deploy to pip
-- [ ] release as .deb
+- [x] install-able thru pip like a doge
 - [x] beautiful .svg

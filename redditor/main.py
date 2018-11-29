@@ -18,8 +18,9 @@ def subreddit(subscribe, unsubscribe):
     """
     Show the dogy list.
     """
-    with open('subreddits.txt', 'r') as f:
+    with open('redditor/subreddits.txt', 'r') as f:
         subreddits = f.read().split()
+
     if subscribe:
         subreddits.append(subscribe)
         subreddits = list(set(subreddits))
@@ -35,8 +36,9 @@ def subreddit(subscribe, unsubscribe):
     else:
         click.echo('Wow, such empty.')
 
-    with open('subreddits.txt', 'w') as f:    
+    with open('redditor/subreddits.txt', 'w') as f:
         f.write(' '.join(subreddits))
+        f.close()
 
 
 @cli.command()
@@ -49,7 +51,7 @@ def feed(subreddit, limit):
     if subreddit:
         subreddits = [subreddit]
     else:
-        with open('subreddits.txt', 'r') as f:
+        with open('redditor/subreddits.txt', 'r') as f:
             subreddits = f.read().split()
 
     reddit = praw.Reddit(client_id='Jdfpe3WHOsTA4g',
@@ -57,14 +59,17 @@ def feed(subreddit, limit):
                      user_agent='script:redditor:v2.0 (by /u/tuanngg__)')
     
     try:
-        for subreddit in subreddits:
-            click.echo(click.style('r/' + subreddit, fg='green', bold=True))
-            submissions = reddit.subreddit(subreddit).top(limit=limit, time_filter='day')
-            for submission in submissions:
-                headline = '[{}] {}'.format(submission.score, submission.title)
-                click.echo(click.style(headline, fg='cyan'))
-                link = 'https://www.reddit.com' + submission.permalink
-                click.echo(link)
-            click.echo()
+        if subreddits:
+            for subreddit in subreddits:
+                click.echo(click.style('r/' + subreddit, fg='green', bold=True))
+                submissions = reddit.subreddit(subreddit).top(limit=limit, time_filter='day')
+                for submission in submissions:
+                    headline = '[{}] {}'.format(submission.score, submission.title)
+                    click.echo(click.style(headline, fg='cyan'))
+                    link = 'https://www.reddit.com' + submission.permalink
+                    click.echo(link)
+                click.echo()
+        else:
+            click.echo('Wow, such empty.')
     except:
         click.echo('Such doge, nice try.')
