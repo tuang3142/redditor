@@ -3,7 +3,7 @@
 command line interface for reddit
 or use reddit like a doge
 
-![demo](https://raw.githack.com/daenylio/redditor/master/demo.svg "demo")
+![demo.svg](https://raw.githack.com/daenylio/redditor/master/demo.svg "demo")
 
 ## usage
 
