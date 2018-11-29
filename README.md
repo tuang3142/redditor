@@ -1,6 +1,6 @@
 # redditor 2.0
 
-use reddit like a doge
+command line interface for reddit
 
 ![demo](https://raw.githack.com/daenylio/redditor/master/demo.svg "demo")
 
