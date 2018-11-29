@@ -8,9 +8,9 @@
         }
         
         #screen {
-                font-family: 'DejaVu Sans Mono', monospace;
+                font-family: 'Monaco', monospace;
                 font-style: normal;
-                font-size: 14px;
+                font-size: 12px;
             }
 
         text {
