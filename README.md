@@ -1,10 +1,13 @@
-# redditor 1.0
+# redditor 2.0
 
-command line interface for reddit
+use reddit like a doge
+
+![demo](link.svg,"demo")
 
 ## usage
 
 ```bash
+Syntax:
 redditor [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -12,12 +15,20 @@ Options:
   --help     Show this message and exit.
 
 Commands:
-  all     show all /r/
-  change  subscribe/unsubscribe to a subreddit
-  feed    most upvoted threads from subs pass 24 hours
+  feed       Much wow, such interesting.
+  subreddit  Show the dogy list.
 ```
 
 ## installation
+
+pre-install
+
+```bash
+pip install click
+pip install praw
+```
+
+in the extracted folder, run:
 
 ```bash
 pip install --editable .
@@ -25,10 +36,10 @@ pip install --editable .
 
 ## to do
 
-the next version should have:
+next version should have:
 
-- [ ] unlimited query
-- [ ] command quit/q/double Enter to quit
-- [ ] deploy to pip
-- [ ] deploy to .deb
-- [ ] beautiful .svg
+- [x] unlimited query
+- [x] command quit/q/double Enter to quit
+- [x] deploy to pip
+- [ ] release as .deb
+- [x] beautiful .svg

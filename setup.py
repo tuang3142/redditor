@@ -3,13 +3,14 @@ from setuptools import setup
 
 setup(
     name='redditor',
-    version='1.0',
+    version='2.0',
     py_modules=['redditor'],
     install_requires=[
         'Click',
+        'Praw'
     ],
     entry_points='''
         [console_scripts]
-        redditor=redditor:main
+        redditor=main:cli
     ''',
 )
