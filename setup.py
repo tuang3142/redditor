@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='redditor',
-    version='0.2.1',
+    version='0.2.2',
     author="Tuan Nguyen",
     author_email="tuan.nguyenviet271@gmail.com",
     description="use reddit like a doge",

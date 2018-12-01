@@ -1,4 +1,4 @@
-# redditor 0.2.1
+# redditor
 
 command line interface for reddit
 or use reddit like a doge
@@ -27,8 +27,6 @@ pip install redditor
 ```
 
 ## to do
-
-version 0.2.1 should have:
 
 - [x] unlimited query
 - [x] install-able thru pip like a doge

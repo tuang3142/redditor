@@ -1,5 +1,6 @@
 import praw
 import click
+from pkg_resources import resource_filename
 
 
 @click.group()
@@ -18,7 +19,8 @@ def subreddit(subscribe, unsubscribe):
     """
     Show the dogy list.
     """
-    with open('redditor/subreddits.txt', 'r') as f:
+    filename = resource_filename(__name__, 'subreddits.txt')
+    with open(filename, 'r') as f:
         subreddits = f.read().split()
 
     if subscribe:
@@ -36,7 +38,7 @@ def subreddit(subscribe, unsubscribe):
     else:
         click.echo('Wow, such empty.')
 
-    with open('redditor/subreddits.txt', 'w') as f:
+    with open(filename, 'w') as f:
         f.write(' '.join(subreddits))
         f.close()
 
@@ -51,7 +53,8 @@ def feed(subreddit, limit):
     if subreddit:
         subreddits = [subreddit]
     else:
-        with open('redditor/subreddits.txt', 'r') as f:
+        filename = resource_filename(__name__, 'subreddits.txt')
+        with open(filename, 'r') as f:
             subreddits = f.read().split()
 
     reddit = praw.Reddit(client_id='Jdfpe3WHOsTA4g',
