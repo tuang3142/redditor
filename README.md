@@ -32,3 +32,4 @@ pip install redditor
 - [x] install-able thru pip like a doge
 - [x] beautiful .svg
 - [ ] improve performance
+- [ ] get a stare
