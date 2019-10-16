@@ -31,3 +31,4 @@ pip install redditor
 - [x] unlimited query
 - [x] install-able thru pip like a doge
 - [x] beautiful .svg
+- [ ] improve performance
