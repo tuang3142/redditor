@@ -32,3 +32,4 @@ pip install redditor
 - [x] install-able thru pip like a doge
 - [x] beautiful .svg
 - [ ] improve performance
+- [ ] make a GUI (but it would not become reddit)
